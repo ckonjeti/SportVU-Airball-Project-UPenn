@@ -19,7 +19,7 @@ events = data["events"]
 #gets coordinates for specified player and appends to playerCoordinates dictionary
 def get_coordinates(arr):
 
-    for x in range (0, 50) :
+    for x in range (0, len(events)) :
         #print(x)
         visitors = []
         home = []
