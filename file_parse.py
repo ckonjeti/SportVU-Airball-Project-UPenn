@@ -6,6 +6,7 @@ Created on Mon May 20 13:32:21 2019
 """
 
 import json
+from collections import defaultdict
 
 
 #opens game file
@@ -15,24 +16,47 @@ with open ("game.json") as f:
 #enters event section of file
 events = data["events"]
 
-#gets coordinates for specified player and appends to playerCoordinates list
-def get_coordinates(playerNum, arr):
-    temp = []
-    for x in range (0, len(events)) :
+#gets coordinates for specified player and appends to playerCoordinates dictionary
+def get_coordinates(arr):
+
+    for x in range (0, 50) :
         #print(x)
+        visitors = []
+        home = []
+        for a in range (0, len(events[x]['visitor']['players'])):
+            visitors.append(events[x]['visitor']['players'][a])
+            
+        for b in range (0, len(events[x]['home']['players'])):
+            home.append(events[x]['home']['players'][b])
+            
+        for c in range(0, len(visitors)):
+            if visitors[c]['playerid'] in arr.keys():
+                pass
+            else:
+                
+                arr[visitors[c]['playerid']] = []
+        for d in range(0, len(home)):
+            if home[d]['playerid'] in arr.keys():
+                pass
+            else:
+                
+                arr[home[d]['playerid']] = []
+        
         try:
-            players = events[x]['moments'][0][5]
-            for element in players:
-                temp.append(players[playerNum])
-            arr.append(temp)
+            for r in range(len(events[x]['moments'])):
+                coords = events[x]['moments'][r][5]
+                for j in range (0, len(coords)):
+                    playerID = coords[j][1]
+                    arr[playerID].append(coords[j])
+               
+            
         except:
             pass
     
 
+playerCoordinates = defaultdict(list)
 
-playerCoordinates = []
+get_coordinates(playerCoordinates)
 
+playerIDs = playerCoordinates.keys()
 
-for i in range (0, len(events[0]['moments'][0][5])):
-    get_coordinates(i, playerCoordinates)
-    
