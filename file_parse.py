@@ -45,9 +45,11 @@ def get_coordinates(arr):
         try:
             for r in range(len(events[x]['moments'])):
                 coords = events[x]['moments'][r][5]
+                time = events[x]['moments'][r][2]
                 for j in range (0, len(coords)):
                     playerID = coords[j][1]
-                    arr[playerID].append(coords[j])
+                    temp = [coords[j][2:], time]
+                    arr[playerID].append(temp)
         except:
             pass
     
