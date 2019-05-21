@@ -24,12 +24,14 @@ def get_coordinates(arr):
         visitors = []
         home = []
         
+        #gets playerIDs for the keys for dict
         for a in range (0, len(events[x]['visitor']['players'])):
             visitors.append(events[x]['visitor']['players'][a])
             
         for b in range (0, len(events[x]['home']['players'])):
             home.append(events[x]['home']['players'][b])
-            
+        
+        #creates empty list for key if key does not exist
         for c in range(0, len(visitors)):
             if visitors[c]['playerid'] in arr.keys():
                 pass
@@ -41,7 +43,7 @@ def get_coordinates(arr):
                 pass
             else:
                 arr[home[d]['playerid']] = []
-                
+        #appends a list containing the coordinates and time to corresponding playerID key
         try:
             for r in range(len(events[x]['moments'])):
                 coords = events[x]['moments'][r][5]
