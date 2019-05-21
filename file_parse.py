@@ -20,9 +20,10 @@ events = data["events"]
 def get_coordinates(arr):
 
     for x in range (0, len(events)) :
-        #print(x)
+        
         visitors = []
         home = []
+        
         for a in range (0, len(events[x]['visitor']['players'])):
             visitors.append(events[x]['visitor']['players'][a])
             
@@ -33,23 +34,20 @@ def get_coordinates(arr):
             if visitors[c]['playerid'] in arr.keys():
                 pass
             else:
-                
                 arr[visitors[c]['playerid']] = []
+                
         for d in range(0, len(home)):
             if home[d]['playerid'] in arr.keys():
                 pass
             else:
-                
                 arr[home[d]['playerid']] = []
-        
+                
         try:
             for r in range(len(events[x]['moments'])):
                 coords = events[x]['moments'][r][5]
                 for j in range (0, len(coords)):
                     playerID = coords[j][1]
                     arr[playerID].append(coords[j])
-               
-            
         except:
             pass
     
