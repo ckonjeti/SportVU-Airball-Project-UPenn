@@ -1,4 +1,5 @@
 import csv
+#from collections import defaultdict
 #from operator import itemgetter
 
 def get_shot_list(file, arr):
@@ -6,13 +7,23 @@ def get_shot_list(file, arr):
         csv_reader = csv.reader(f, delimiter=',')
         for row in csv_reader:
             if (row[10] == 'Missed Shot'):
-                temp = [row[1], int(row[2]), row[3]]
-                arr.append(temp)
-        
-shot_list = []
+                if row[1] not in arr.keys():
+                    arr[row[1]] = []
+                else:
+                    pass
+                temp = arr.get(row[1])
+                temp.append([int(row[2]), row[3]])
+                arr[row[1]] = temp
+               
+                    
+
+shot_list = {}
 
 get_shot_list('shots.csv', shot_list)
 
-shot_list = sorted(shot_list, key = lambda x: (x[0], x[1]))
+sorted(shot_list.items(), key = lambda item: (item[0]))
 
-print(shot_list[:300])
+for key in shot_list:
+    shot_list[key].sort()
+
+#print(shot_list)
