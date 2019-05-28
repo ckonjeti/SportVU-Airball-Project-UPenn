@@ -1,6 +1,7 @@
 import json
 from collections import defaultdict
 
+#Array: {playerID: {game-event-ID: [coordinates, time]}}
 
 #gets coordinates for specified player and appends to specified defaultdict(dict)
 def get_coordinates(file, arr):
@@ -23,7 +24,7 @@ def get_coordinates(file, arr):
         for b in range (0, len(events[x]['home']['players'])):
             home.append(events[x]['home']['players'][b])
         
-        #creates empty list for key if key does not exist
+        #creates empty dictionary for key if key does not exist
         for c in range(0, len(visitors)):
             if visitors[c]['playerid'] in arr.keys():
                 pass
@@ -37,20 +38,18 @@ def get_coordinates(file, arr):
                 arr[home[d]['playerid']] = {}
         #appends a list containing the coordinates and time to corresponding playerID key
         try:
-            
             for r in range(len(events[x]['moments'])):
                 coords = events[x]['moments'][r][5]
                 time = events[x]['moments'][r][2]
-                #print('1')
                 for j in range (0, len(coords)):
                     temp = defaultdict(list)
                     playerID = coords[j][1]
-                    #print(arr[playerID].keys())
+                    
                     if events[x]['eventId'] in arr[playerID].keys():
                         pass
                     else:
                         temp = []
-                        #print('2')
+                        
                     if events[x]['eventId'] not in arr[playerID].keys():
                         temp = [[coords[j][2:], time]]
                     else:
@@ -62,3 +61,6 @@ def get_coordinates(file, arr):
         except:
             pass
         
+        
+def main(file, arr):
+    get_coordinates(file, arr)
