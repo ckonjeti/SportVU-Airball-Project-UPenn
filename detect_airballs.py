@@ -9,7 +9,6 @@ from scipy.interpolate import *
 from scipy.stats import *
 
 
-
 player_coordinates = defaultdict(dict) #(playerID: game event id: [coordinates, time])
 
 get_coordinates.main('game.json', player_coordinates)
@@ -24,45 +23,44 @@ airball_arr = []
 
 def detect_airballs(coord_arr, shot_arr, airball_arr, gameID):
     game_event_list = []
+    
     for key in shot_arr:
         if key == gameID:
             for shot in shot_arr.get(str(key)):
                 game_event_list.append(str(shot[0]))
     ball_coord_list = {}
     ball_coords = coord_arr.get(-1)
+    
     for event in game_event_list:
         if event in ball_coords.keys():
             ball_coord_list[event] = (list(coord_arr.get(-1).get(event)))
     xs, ys, zs, times = [], [], [], []
+    
     for key in ball_coord_list:
         for coords, time in ball_coord_list.get(key):
-            for arr in coords:
-                if (coords[2] > 9):
-                    times.append(time)
-                    xs.append(coords[0])
-                    ys.append(coords[1])
-                    zs.append(coords[2])
-                else:
-                    try:
-                        if (len(xs) != 0):
-                            print(xs)
-                            print('-----------------')
-                            print(times)
-                            print('-----------------')
-                        xy = polyfit(xs, ys, 2)
-                        xz = polyfit(xs, zs, 2)
-                        yz = polyfit(ys, zs, 2)
-                        if (xy > .75 and xz > .75 and yz > .75):
-                            #print(xy, xz, yz)
-                            airball_arr.append(times[0])
-                        xs.clear()
-                        ys.clear()
-                        zs.clear()
-                        times.clear()
-                    except:
-                        pass
+            if (coords[2] > 9):
+                times.append(time)
+                xs.append(coords[0])
+                ys.append(coords[1])
+                zs.append(coords[2])            
+            else:
+                try:
+                    xy = polyfit(xs, ys, 1)
+                    xz = polyfit(xs, zs, 2)
+                    yz = polyfit(ys, zs, 2)
+                    
+                    if (xy > .99 and xz > .99 and yz > .99):
+                        airball_arr.append(times[0])
+                            
+                    xs.clear()
+                    ys.clear()
+                    zs.clear()
+                    times.clear()
+                except:
+                    pass
+                
     fig = plt.figure()
-    ax = fig.add_subplot(111, projection = '3d')
+    ax = fig.add_subplot(111)
     ax.scatter(xs, ys, zs)
     plt.ylim(0, 13)
     

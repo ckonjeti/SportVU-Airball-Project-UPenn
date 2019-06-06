@@ -1,0 +1,2 @@
+nba_py documentation website: https://www.slothparadise.com/nba_py-documentation/
+nba_py github link: https://github.com/seemethere/nba_py/wiki/stats.nba.com-Endpoint-Documentation
