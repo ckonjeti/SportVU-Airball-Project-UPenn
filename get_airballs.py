@@ -8,6 +8,6 @@ def get_airballs(file, arr):
         csv_reader = csv.reader(f, delimiter=',')
         for row in csv_reader:
             temp = arr[row[0]]
-            temp.append([row[1], row[2]])
+            temp.append([row[1], row[2], str(row[3]) + ' ' +  str(row[4])])
             arr[row[0]] = temp
 
