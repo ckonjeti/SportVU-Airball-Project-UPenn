@@ -13,14 +13,11 @@ get_airballs('airballs.csv', airball_list)
 
 game_ids = []
 for id in airball_list:
-    game_ids.append(id)
+    game_ids.append('00'+id)
 
 for filename in os.listdir(play_by_play_directory):
-
     temp_game_id = get_game_id(play_by_play_directory + '/' + filename,)[2:12]
-
     if temp_game_id in game_ids:
-
         rebounds = get_rebounds(play_by_play_directory + '/' + filename, [])
         assists = get_assists(play_by_play_directory + '/' + filename, [])
         fouls = get_fouls(play_by_play_directory + '/' + filename, [])
