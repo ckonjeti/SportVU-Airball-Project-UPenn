@@ -60,13 +60,19 @@ def output_list_for_5_mins_after_airball(filename, dict_of_nums = {}, list = [])
             else:
                 dict[val[0]] = [val[1]]
 
-    counts = {'rebound': 0, 'free throw': 0, 'foul': 0, 'shot': 0, 'turnover': 0, 'sub': 0, 'miss': 0, 'violation': 0}
+    counts = {'rebound': 0, 'free throw': 0, 'foul': 0, 'shot': 0, 'turnover': 0, 'sub': 0, 'miss': 0, 'violation': 0, 'end of period': 0, 'jump ball': 0, 'start of period': 0, 'timeout': 0, 'unknown': 0}
 
     for key in dict:
         for val in dict.get(key):
-            old = counts.get(val)
-            old += 1
-            counts.update({val: old})
+            try:
+                #print('val', val)
+                #print(counts)
+                old = counts.get(val)
+                #print(old)
+                old += 1
+                counts.update({val: old})
+            except:
+                continue
         dict_of_nums.update({key: counts})
         counts = counts.fromkeys(counts, 0)
     return dict_of_nums

@@ -64,7 +64,7 @@ def get_rebounds(file, arr):
                 temp = [row[21], row[31], row[37], row[13], row[16]]
                 arr.append(temp)
         return arr
-            
+
 #[assist player, shot player, period, time remaining]
 def get_assists(file, arr):
     with open(file) as f:
@@ -75,7 +75,7 @@ def get_assists(file, arr):
                 temp = [row[22], row[31], row[13], row[16]]
                 arr.append(temp)
         return arr
-        
+
 #[foul, foul player, reason for foul, period, time remaining]
 def get_fouls(file, arr):
     with open(file) as f:
@@ -86,7 +86,7 @@ def get_fouls(file, arr):
                 temp = [row[21], row[31], row[34], row[13], row[16]]
                 arr.append(temp)
         return arr
-        
+
 #[turnover, turnover player, reason for turnover, period, time remaining]
 def get_turnovers(file, arr):
     with open(file) as f:
@@ -97,7 +97,7 @@ def get_turnovers(file, arr):
                 temp = [row[21], row[31], row[34], row[13], row[16]]
                 arr.append(temp)
         return arr
-        
+
 #[free throw, player, made or missed, period, time remaining]
 def get_freethrows(file, arr):
     with open(file) as f:
@@ -109,4 +109,3 @@ def get_freethrows(file, arr):
                 arr.append(temp)
         return arr
 
-    
