@@ -12,13 +12,23 @@ play_by_play_directory = 'C:/Users/Chaitu Konjeti/SportVU_Airball_Project/play-b
 
 arr = []
 list_of_plays = {}
+
+def get_all_plays_before_event(file, airball_player, event_id, list_of_plays):
+    with open(file) as f:
+        csv_reader = csv.reader(f, delimiter=',')
+        for row in csv_reader:
+            if row[19] < event_id:
+                if row[31] == airball_player:
+                    list_of_plays.append([airball_player, row[21], row[0], row[13], row[19], row[34], row[35], row[37]])
+    return list_of_plays
+
 def get_plays_within_times(file, airball_player, begin_time, end_time, period, list_of_plays):
     with open(file) as f:
         csv_reader = csv.reader(f, delimiter=',')
         for row in csv_reader:
             if row[16] <= begin_time and row[16] >= end_time and row[13] == period:
                 if row[31] == airball_player:
-                    list_of_plays[row[21]] = [airball_player, row[0], row[13], row[19], row[34], row[35], row[37]]
+                    list_of_plays.append([airball_player, row[21], row[0], row[13], row[19], row[34], row[35], row[37]])
     return list_of_plays
 
 def get_period(file, eventid):
