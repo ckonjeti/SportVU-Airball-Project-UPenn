@@ -46,8 +46,11 @@ def get_events_after_5_mins(filename, airball_list, game_ids, play_by_play_direc
 
     #print('count ', count)
 
-def output_list_for_5_mins_after_airball(filename, dict_of_nums = {}, list = []):
+def output_list_for_5_mins_after_airball(filename):
+    list = []
     get_events_after_5_mins(filename,airball_list, game_ids, play_by_play_directory, list)
+
+    dict_of_nums = {}
 
     dict = {}
 
