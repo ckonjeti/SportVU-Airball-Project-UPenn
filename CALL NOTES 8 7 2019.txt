@@ -1,0 +1,15 @@
+1) How quickly they get subbed out distribution (time)
+1) run algorithm for airballs at ft line
+
+Once they get subbed back in what do they do (same time range)
+
+average distance of the next shot attempt
+
+look into player hustle metrics
+
+distance a player covers
+speed a player covers
+
+metrics for all fouls
+
+look at foul and sub bug
